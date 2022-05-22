@@ -1,6 +1,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+// profile library
+const theManager = require('/library/managers')
+
 const manager = () => {
 inquirer
     .prompt([
