@@ -10,8 +10,7 @@ const theManager = require('./library/managers')
 const theTeam = [];
 
 const manager = () => {
-inquirer
-    .prompt([
+    inquirer.prompt([
         {
            type: 'input',
            name: 'name',
@@ -38,7 +37,7 @@ inquirer
     ])
     .then(addManager => {
         const {name, id, email, office} = addManager;
-        const newManager = new manager (name, id, email, office);
+        const newManager = new theManager (name, id, email, office);
         theTeam.push(newManager);
     });
 };
@@ -102,6 +101,18 @@ const addEmployees = () => {
 
         let employee;
         theTeam.push(employee);
+    });
+};
+
+// write the inputted data to dynamic HTML, return error if not written
+const writeHTML = teamData => {
+    fs.writeHTML('./DIST/index.html', data, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("Team profile generated!")
+        }
     });
 };
 
