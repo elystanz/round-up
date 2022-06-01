@@ -1,5 +1,5 @@
 // a general database to hold employee information -- other profiles will extend this one
-class generalEmploy {
+class Employee {
     constructor (name, id, email) {
         this.name = name;
         this.id = id;
@@ -20,4 +20,4 @@ class generalEmploy {
 
 };
 
-module.exports = generalEmploy;
+module.exports = Employee;

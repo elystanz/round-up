@@ -1,121 +1,158 @@
 // required modules
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generatedHTML = require('./generated-cards/generatedHTML');
 
 // profile library
-const theManager = require('./library/managers')
-const anEngineer = require('./library/engineer')
-const anIntern = require('./library/intern')
+const Manager = require('./library/managers');
+const Engineer = require('./library/engineer');
+const Intern = require('./library/intern');
 
+// set team into an array
+const teamArray = [];
 
-// consolidate team into array
-const theTeam = [];
+// set questions for each employee type
+const managerQ = [
+    {
+       type: 'input',
+       name: 'name',
+       message: 'Enter manager name' 
+    },
 
-const manager = () => {
-    inquirer.prompt([
-        {
-           type: 'input',
-           name: 'name',
-           message: 'Enter manager name' 
-        },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'Enter manager ID'
+    },
 
-        {
-            type: 'input',
-            name: 'id',
-            message: 'Enter manager ID'
-        },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'Enter manager e-mail'
+    },
 
-        {
-            type: 'input',
-            name: 'email',
-            message: 'Enter manager e-mail'
-        },
+    {
+        type: 'input',
+        name: 'office',
+        message: 'Enter manager office number'
+    }
+]
 
-        {
-            type: 'input',
-            name: 'office',
-            message: 'Enter manager office number'
+const employeeQ = [
+    {
+        type: 'list',
+        name: 'role',
+        message: 'Please select employee role',
+        choices: 
+            [
+            'engineer',
+            'intern',
+            'finish building team'
+            ]
+    }
+];
+
+const engineerQ = [
+    {
+        type: 'input',
+        name: 'name',
+        message: 'Enter engineer name'
+    },
+
+    {
+        type: 'input',
+        name: 'id',
+        message: 'Enter engineer ID'
+    },
+
+    {
+        type: 'input',
+        name: 'email',
+        message: 'Enter engineer email'
+    },
+
+    {
+        type: 'input',
+        name: 'gitHub',
+        message: 'Enter engineer GitHub username',
+            when: (input) => input.role === 'engineer'
+    }
+];
+
+const internQ = [
+    {
+        type: 'input',
+        name: 'name',
+        message: 'Enter employee name'
+    },
+
+    {
+        type: 'input',
+        name: 'id',
+        message: 'Enter employee ID'
+    },
+
+    {
+        type: 'input',
+        name: 'email',
+        message: 'Enter employee email'
+    },
+
+    {
+        type: 'input',
+        name: 'school',
+        message: 'Enter intern school',
+            when: (input) => input.role === 'intern' 
+    }
+];
+
+async function setTeam() {
+    await inquirer.prompt(managerQ).then(async(answers) => {
+        const manager = new Manager(
+            answers.name,
+            answers.id,
+            answers.email,
+            answers.office
+        );
+
+        teamArray.push(manager);
+        
+        let employeeType
+        while (employeeType != 'finish building team') {
+            await inquirer.prompt(employeeQ).then(async(answer) => {
+                employeeType = answer.role;
+                
+                if (employeeType === 'Engineer') {
+                    await inquirer.prompt(engineerQ).then(async(answers) => {
+                        const engineer = new Engineer(
+                            answers.name,
+                            answers.id,
+                            answers.email,
+                            answers.gitHub
+                        );
+                        teamArray.push(engineer);
+                    });
+                } if (employeeType === 'Intern') {
+                    await inquirer.prompt(internQ).then(async(answers) => {
+                        const intern = new Intern(
+                            answers.name,
+                            answers.id,
+                            answers.email,
+                            answer.school
+                        );
+                        teamArray.push(intern);
+                    });
+                }
+            });
         }
-    ])
-    .then(addManager => {
-        const {name, id, email, office} = addManager;
-        const newManager = new theManager (name, id, email, office);
-        theTeam.push(newManager);
+    });
+
+    const data = generatedHTML(teamArray)
+    fs.writeFile('index.html', data, (error) => {
+        if (error) {
+            return console.error('An error has occurred!');
+        } else console.log('Success!')
     });
 };
 
-const addEmployees = () => {
-    inquirer.prompt ([
-        {
-            type: 'list',
-            name: 'role',
-            message: 'Please select employee role',
-            choices: 
-                [
-                'engineer',
-                'intern',
-                'finish building team'
-                ]
-        },
-
-        {
-            type: 'input',
-            name: 'name',
-            message: 'Enter employee name'
-        },
-
-        {
-            type: 'input',
-            name: 'id',
-            message: 'Enter employee ID'
-        },
-
-        {
-            type: 'input',
-            name: 'email',
-            message: 'Enter employee email'
-        },
-
-        {
-            type: 'input',
-            name: 'gitHub',
-            message: 'Enter employee GitHub username',
-                when: (input) => input.role === 'engineer'
-        },
-
-        {
-            type: 'input',
-            name: 'school',
-            message: 'Enter intern school',
-                when: (input) => input.role === 'intern' 
-        }
-
-    ]).then(teamData => {
-        let{name, id, email, role, gitHub, school} = teamData;
-
-        if (role === 'engineer') {
-            employee = new eningeer (name, id, email, gitHub);
-        } else if (role === 'intern') {
-            employee = new intern (name, id, email, school)
-        } else if (role === 'finish building team') {
-            return theTeam;
-        }
-
-        let employee;
-        theTeam.push(employee);
-    });
-};
-
-// write the inputted data to dynamic HTML, return error if not written
-const writeHTML = teamData => {
-    fs.writeHTML('./DIST/index.html', data, err => {
-        if (err) {
-            console.log(err);
-            return;
-        } else {
-            console.log("Team profile generated!")
-        }
-    });
-};
-
-manager();
+setTeam();

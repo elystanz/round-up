@@ -1,57 +1,80 @@
 // create cards for manager, engineer, and intern to be created on the page once inputted
-const managerCard = (manager) => {
-    return `
-    <div class = "col mb-4">
-        <div class = "card">
-            <div class = "card-header">
-                <p>${manager.name}</p>
-                <p>Manager</p>
-            </div>
+function teamGenerator(team) {
+    return team.map((employee) => {
+        if (employee.getRole() === 'Manager') {
+            return `
+            <div class = "col mb-4">
+                <div class = "card">
+                    <div class = "card-header">
+                        <p>${employee.generalName}</p>
+                        <p>Manager</p>
+                    </div>
+        
+                    <div class = "card-body">
+                        <p class = "id"> id: ${employee.generalId}</p>
+                        <p class = "email"> e-mail: ${employee.generalEmail}</p>
+                        <p class = "office"> office: ${employee.office}</p>
+                    </div>
+                </div>
+            </div>`
+        } else if (employee.getRole() === 'Engineer') {
+            return `
+            <div class = "col mb-4">
+                <div class = "card">
+                    <div class = "card-header">
+                        <p>${employee.generalName}</p>
+                        <p>Manager</p>
+                    </div>
+        
+                    <div class = "card-body">
+                        <p class = "id"> id: ${employee.generalId}</p>
+                        <p class = "email"> e-mail: ${employee.generalEmail}</p>
+                        <p class = "gitHub"> github: ${employee.getGit}</p>
+                    </div>
+                </div>
+            </div>`
+        } else if (employee.getRole() === 'Intern') {
+            return `
+            <div class = "col mb-4">
+                <div class = "card">
+                    <div class = "card-header">
+                        <p>${employee.generalName}</p>
+                        <p>Manager</p>
+                    </div>
 
-            <div class = "card-body">
-                <p class = "id"> id: ${manager.id}</p>
-                <p class = "email"> e-mail: ${manager.email}</p>
-                <p class = "office"> office: ${manager.office}</p>
-            </div>
-        </div>
-    </div>
-    `;
+                    <div class = "card-body">
+                        <p class = "id"> id: ${employee.generalId}</p>
+                        <p class = "email"> e-mail: ${employee.generalEmail}</p>
+                        <p class = "school"> school: ${employee.getSchool}</p>
+                    </div>
+                </div>
+            </div>`
+        }
+    });
 }
 
-const engineerCard = (engineer) => {
+function generatedHTML(team) {
     return `
-    <div class = "col mb-4">
-        <div class = "card">
-            <div class = "card-header">
-                <p>${engineer.name}</p>
-                <p>Manager</p>
-            </div>
+    <DOCTYPE! html>
+    <html lang='en'>
+        <head>
+            <meta charset='UTF-8'
+            <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+            <meta name='viewport' content='width=<device-width>, initial-scale=1.0'>
+            <title>Employee Round Up!</title>
+            <link href='./style.css' rel='stylesheet'>
+        </head>
+        <body>
+            <header>
+                My Team
+            </header>
 
-            <div class = "card-body">
-                <p class = "id"> id: ${engineer.id}</p>
-                <p class = "email"> e-mail: ${engineer.email}</p>
-                <p class = "gitHub"> github: ${engineer.gitHub}</p>
+            <div class='team'>
+                ${teamGenerator(team)}
             </div>
-        </div>
-    </div>
-    `;
-}
+        </body>
+    </html>
+    `
+};
 
-const internCard = (intern) => {
-    return `
-    <div class = "col mb-4">
-        <div class = "card">
-            <div class = "card-header">
-                <p>${intern.name}</p>
-                <p>Manager</p>
-            </div>
-
-            <div class = "card-body">
-                <p class = "id"> id: ${intern.id}</p>
-                <p class = "email"> e-mail: ${intern.email}</p>
-                <p class = "school"> school: ${intern.school}</p>
-            </div>
-        </div>
-    </div>
-    `;
-}
+module.exports = generatedHTML;

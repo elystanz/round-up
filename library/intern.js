@@ -1,7 +1,7 @@
 // use general.js to bring in constructor, expand upon that for manager
-const general = require('./general');
+const Employee = require('./general');
 
-class intern extends general {
+class Intern extends Employee {
     constructor (name, id, email, school) {
         super(name, id, email);
         this.school = school;
@@ -12,8 +12,8 @@ class intern extends general {
     }
 
     getRole () {
-        return "intern";
+        return "Intern";
     }
 };
 
-module.exports = intern;
+module.exports = Intern;
