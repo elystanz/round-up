@@ -1,0 +1,24 @@
+:root {
+    --primary: #ffead0;
+    --secondary: #f76f8e;
+    --tertiary: #99616b;
+    --quaternary: #37505c;
+    --quinary: #113537;
+}
+
+* {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+header {
+    background-color: var(--quinary);
+    color: var(--primary);
+    font-size: 30px;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+
+}

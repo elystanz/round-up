@@ -4,6 +4,8 @@ const fs = require('fs');
 
 // profile library
 const theManager = require('./library/managers')
+const anEngineer = require('./library/engineer')
+const anIntern = require('./library/intern')
 
 
 // consolidate team into array
