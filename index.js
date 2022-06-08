@@ -73,9 +73,9 @@ const engineerQ = [
 
     {
         type: 'input',
-        name: 'gitHub',
+        name: 'github',
         message: 'Enter engineer GitHub username',
-            when: (input) => input.role === 'engineer'
+            // when: (input) => input.role === 'engineer'
     }
 ];
 
@@ -83,26 +83,26 @@ const internQ = [
     {
         type: 'input',
         name: 'name',
-        message: 'Enter employee name'
+        message: 'Enter intern name'
     },
 
     {
         type: 'input',
         name: 'id',
-        message: 'Enter employee ID'
+        message: 'Enter intern ID'
     },
 
     {
         type: 'input',
         name: 'email',
-        message: 'Enter employee email'
+        message: 'Enter intern email'
     },
 
     {
         type: 'input',
         name: 'school',
         message: 'Enter intern school',
-            when: (input) => input.role === 'intern' 
+            // when: (input) => input.role === 'intern' 
     }
 ];
 
@@ -122,23 +122,23 @@ async function setTeam() {
             await inquirer.prompt(employeeQ).then(async(answer) => {
                 employeeType = answer.role;
                 
-                if (employeeType === 'Engineer') {
+                if (employeeType === 'engineer') {
                     await inquirer.prompt(engineerQ).then(async(answers) => {
                         const engineer = new Engineer(
                             answers.name,
                             answers.id,
                             answers.email,
-                            answers.gitHub
+                            answers.github
                         );
                         teamArray.push(engineer);
                     });
-                } if (employeeType === 'Intern') {
+                } if (employeeType === 'intern') {
                     await inquirer.prompt(internQ).then(async(answers) => {
                         const intern = new Intern(
                             answers.name,
                             answers.id,
                             answers.email,
-                            answer.school
+                            answers.school
                         );
                         teamArray.push(intern);
                     });
