@@ -142,17 +142,24 @@ async function setTeam() {
                         );
                         teamArray.push(intern);
                     });
+                } if (employeeType === 'finish building team') {
+                    const data = generatedHTML(teamArray)
+                    fs.writeFile('index.html', data, (error) => {
+                        if (error) {
+                            return console.error('An error has occurred!');
+                        } else console.log('Success!')
+                    });
                 }
             });
         }
     });
 
-    const data = generatedHTML(teamArray)
-    fs.writeFile('index.html', data, (error) => {
-        if (error) {
-            return console.error('An error has occurred!');
-        } else console.log('Success!')
-    });
+    // const data = generatedHTML(teamArray)
+    // fs.writeFile('index.html', data, (error) => {
+    //     if (error) {
+    //         return console.error('An error has occurred!');
+    //     } else console.log('Success!')
+    // });
 };
 
 setTeam();
