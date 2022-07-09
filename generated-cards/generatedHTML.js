@@ -6,10 +6,10 @@ function teamGenerator(team) {
             <div class="row d-flex justify-content-center m-2">
                 <div class="card m-3" style="width: 20rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Manager: ${employee.generalName}</h5>
-                        <h6 class="card-subtitle mb-2 email">e-mail: ${employee.generalEmail}</h6>
+                        <h5 class="card-title">Manager: ${employee.name}</h5>
+                        <h6 class="card-subtitle mb-2 email">e-mail: ${employee.email}</h6>
                         <p class="card-text office">office: ${employee.office}</p>
-                        <p class="card-text id">id: ${employee.generalId}</p>
+                        <p class="card-text id">id: ${employee.id}</p>
                     </div>
                 </div>
             </div>`
@@ -18,10 +18,10 @@ function teamGenerator(team) {
             <div class="row d-flex justify-content-center m-2">
                 <div class="card m-3" style="width: 20rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Manager: ${employee.generalName}</h5>
-                        <h6 class="card-subtitle mb-2 email">e-mail: ${employee.generalEmail}</h6>
-                        <p class="card-text office">github: ${employee.getGit}</p>
-                        <p class="card-text id">id: ${employee.generalId}</p>
+                        <h5 class="card-title">Engineer: ${employee.name}</h5>
+                        <h6 class="card-subtitle mb-2 email">e-mail: ${employee.email}</h6>
+                        <p class="card-text office">github: ${employee.github}</p>
+                        <p class="card-text id">id: ${employee.id}</p>
                     </div>
                 </div>
             </div>`
@@ -30,10 +30,10 @@ function teamGenerator(team) {
             <div class="row d-flex justify-content-center m-2">
                 <div class="card m-3" style="width: 20rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Manager: ${employee.generalName}</h5>
-                        <h6 class="card-subtitle mb-2 email">e-mail: ${employee.generalEmail}</h6>
-                        <p class="card-text office">school: ${employee.getSchool}</p>
-                        <p class="card-text id">id: ${employee.generalId}</p>
+                        <h5 class="card-title">Intern: ${employee.name}</h5>
+                        <h6 class="card-subtitle mb-2 email">e-mail: ${employee.email}</h6>
+                        <p class="card-text office">school: ${employee.school}</p>
+                        <p class="card-text id">id: ${employee.id}</p>
                     </div>
                 </div>
             </div>`
