@@ -15,9 +15,11 @@ Run `npm i` to install all dependencies already declared in the package.json fil
 
 ## <a id="application">Application</a>
 Here is the application in use:
+
 ![Round-Up](https://user-images.githubusercontent.com/95983252/178124517-58987338-49ab-4f72-9aa7-7ba28a8ce7b0.gif)
 
 Here is a quick demonstration of the tests that can be run to determine the application is running as expected:
+
 ![RoundUp-tests](https://user-images.githubusercontent.com/95983252/178125154-b33043d9-ff97-4f8a-a171-4391d8ff099a.gif)
 
 ## <a id="roadmap">Roadmap</a>
